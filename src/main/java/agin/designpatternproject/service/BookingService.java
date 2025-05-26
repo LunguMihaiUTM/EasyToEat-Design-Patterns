@@ -1,13 +1,11 @@
 package agin.designpatternproject.service;
-
-import agin.designpatternproject.dto.request.BookingDTO;
 import agin.designpatternproject.entity.Booking;
-import agin.designpatternproject.enums.Status;
+
+import java.util.List;
 
 public interface BookingService {
-
-    void validateAndBook(BookingDTO bookingdto);
-    void finalizeBooking(Long bookingId, Status status);
-    Double getBookingPrice(Long bookingId);
     String reorder(Long bookingId);
+    List<Booking> getUserBookings(Long userId);
+    String nextState(Long bookingId);
+    String cancelBooking(Long bookingId);
 }
