@@ -45,17 +45,12 @@ public class Booking implements Prototype<Booking> {
     @Column(name = "final_price")
     private Double finalPrice;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    @ManyToOne
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER_BOOKING"))
+    private User user;
 
     @Column(name = "items")
     private String items;
-
-    @Column(name = "mail")
-    private String mail;
 
     @PrePersist
     protected void onCreate() {
@@ -72,10 +67,8 @@ public class Booking implements Prototype<Booking> {
         clone.bookingStatus = Status.IN_PROGRESS;
         clone.noPeople = this.noPeople;
         clone.finalPrice = this.finalPrice;
-        clone.name = this.name;
-        clone.phoneNumber = this.phoneNumber;
+        clone.user = this.user;
         clone.items = this.items;
-        clone.mail = this.mail;
         return clone;
     }
 }
