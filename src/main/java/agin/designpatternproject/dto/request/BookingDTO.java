@@ -1,5 +1,6 @@
 package agin.designpatternproject.dto.request;
 
+import agin.designpatternproject.entity.User;
 import agin.designpatternproject.enums.Status;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -17,11 +18,7 @@ import java.util.List;
 public class BookingDTO {
     private Long id;
     @NotNull
-    private String name;
-    @NotNull
-    private String phoneNumber;
-    @Email
-    private String mail;
+    private User user;
     @Builder.Default
     private Integer noPeople = 0;
     private String preferences;
