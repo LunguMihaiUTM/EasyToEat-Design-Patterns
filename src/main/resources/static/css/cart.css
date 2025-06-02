@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    color: #1C1C1C;
+}
+
+#cartContainer {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+    max-width: 900px;       /* max lățime */
+    margin: 20px auto;      /* centrat și spațiu sus/jos */
+    padding-left: 25px;     /* spațiu stânga */
+    padding-right: 25px;    /* spațiu dreapta */
+}
+
+#cartSummary{
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+    max-width: 900px;       /* max lățime */
+    margin: 20px auto;      /* centrat și spațiu sus/jos */
+    padding-left: 25px;     /* spațiu stânga */
+    padding-right: 25px;    /* spațiu dreapta */
+}
+
+#cartName{
+    margin-top: 30px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 4px;
+}
+
+.cart-item-quantity {
+    font-size: 0.9em;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.quantity-btn {
+    background-color: #FF5C00;
+    border: none;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+    user-select: none;
+    font-size: 1.1em;
+    line-height: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity-btn:active {
+    background-color: #e04e00;
+}
+
+.quantity-value {
+    min-width: 24px;
+    text-align: center;
+}
+
+.cart-item-price {
+    font-weight: bold;
+    color: #FF5C00;
+    margin-left: 15px;
+    min-width: 80px;
+    text-align: right;
+}
+
+.remove-btn {
+    background: transparent;
+    border: none;
+    color: #e74c3c;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 15px;
+    line-height: 1;
+    user-select: none;
+}
+
+#cartSummary {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 1.2em;
+}
+
+#checkoutBtn {
+    background-color: #FF5C00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#checkoutBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyToEat - Acasă</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+<!-- Include navbar -->
+<div th:replace="~{navbar :: navbar}"></div>
+
+<main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Bun venit la EasyToEat!</h1>
+                <p class="hero-subtitle">Descoperă cele mai delicioase mâncăruri din orașul tău</p>
+                <div class="search-bar" style="position:relative;">
+                    <input type="text" placeholder="Caută restaurante sau mâncăruri..." class="search-input" autocomplete="off">
+                    <button class="search-btn">🔍</button>
+                    <!-- Dropdown va fi creat dinamic prin JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Categorii populare</h2>
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be loaded here by JavaScript -->
+                <div class="category-loading">Se încarcă categoriile...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">De ce să alegi EasyToEat?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🍕</div>
+                    <h3>Varietate mare</h3>
+                    <p>Alege dintre sute de restaurante și mii de mâncăruri delicioase</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Livrare rapidă</h3>
+                    <p>Comandă online și primește mâncarea ta preferată în cel mai scurt timp</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Plată securizată</h3>
+                    <p>Plătește în siguranță cu cardul sau cash la livrare</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

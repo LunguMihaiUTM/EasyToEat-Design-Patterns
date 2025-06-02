@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizare Comandă - EasyToEat</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/checkout.css}">
+</head>
+<body>
+<!-- Include navbar-ul existent -->
+<div th:insert="~{navbar :: navbar}"></div>
+
+<div class="checkout-container">
+    <div class="checkout-header">
+        <h1>Finalizare Comandă</h1>
+        <p>Completați detaliile pentru a finaliza comanda dvs.</p>
+    </div>
+
+    <div class="checkout-content">
+        <div class="checkout-form-section">
+            <form id="checkoutForm" class="checkout-form">
+                <!-- Secțiunea Detalii Comandă -->
+                <div class="form-section">
+                    <h2>Detalii Comandă</h2>
+
+                    <div class="form-group">
+                        <label for="noPeople">Numărul de persoane</label>
+                        <input type="number" id="noPeople" name="noPeople" min="1" max="20" value="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookingDate">Data și ora rezervării</label>
+                        <input type="datetime-local" id="bookingDate" name="bookingDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Selectați locația</label>
+                        <select id="location" name="locationId" required>
+                            <option value="">Alegeți locația...</option>
+                            <!-- Opțiunile vor fi populate dinamic -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preferences">Preferințe speciale (opțional)</label>
+                        <textarea id="preferences" name="preferences" rows="3" placeholder="Ex: alergie la nuci, masa lângă fereastră..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Secțiunea Cod Promoțional -->
+                <div class="form-section">
+                    <h2>Cod Promoțional</h2>
+                    <div class="form-group">
+                        <div class="promo-input-group">
+                            <input type="text" id="promoCode" name="promoCode" placeholder="Introduceți codul promoțional">
+                            <button type="button" id="applyPromoBtn" class="apply-promo-btn">Aplică</button>
+                        </div>
+                        <div id="promoMessage" class="promo-message"></div>
+                    </div>
+                </div>
+
+                <!-- Secțiunea Metodă de Plată -->
+                <div class="form-section">
+                    <h2>Metodă de Plată</h2>
+                    <div class="payment-methods">
+                        <div class="payment-option">
+                            <input type="radio" id="cash" name="paymentType" value="cash" checked>
+                            <label for="cash" class="payment-label">
+                                <span class="payment-icon">💵</span>
+                                <span>Numerar</span>
+                            </label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="card" name="paymentType" value="card">
+                            <label for="card" class="payment-label">
+                                <span class="payment-icon">💳</span>
+                                <span>Card</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Butoane de acțiune -->
+                <div class="form-actions">
+                    <button type="button" id="backToCartBtn" class="btn-secondary">Înapoi la Coș</button>
+                    <button type="submit" id="submitOrderBtn" class="btn-primary">
+                        <span class="btn-text">Finalizează Comanda</span>
+                        <span class="btn-loader" style="display: none;">Se procesează...</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sumar comandă -->
+        <div class="order-summary">
+            <h2>Sumar Comandă</h2>
+            <div id="orderItems" class="order-items">
+                <!-- Produsele vor fi populate dinamic -->
+            </div>
+            <div class="order-total">
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">0.00 MDL</span>
+                </div>
+                <div class="total-row discount-row" id="discountRow" style="display: none;">
+                    <span>Reducere:</span>
+                    <span id="discount">-0.00 MDL</span>
+                </div>
+                <div class="total-row final-total">
+                    <span>Total:</span>
+                    <span id="finalTotal">0.00 MDL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal pentru detalii card -->
+<div id="cardModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Detalii Card</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="cardForm">
+                <div class="form-group">
+                    <label for="cardNumber">Numărul cardului</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry">Data expirării</label>
+                        <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="cancelCardBtn" class="btn-secondary">Anulează</button>
+                    <button type="submit" id="saveCardBtn" class="btn-primary">Salvează</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay pentru loading -->
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="loading-spinner"></div>
+    <p>Se procesează comanda...</p>
+</div>
+
+<script th:src="@{/js/finalize-order.js}"></script>
+<script th:src="@{/js/navbar.js}"></script>
+</body>
+</html>

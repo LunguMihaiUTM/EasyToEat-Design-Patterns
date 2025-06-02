@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Coșul Meu - EasyToEat</title>
+    <link th:href="@{/css/cart.css}" rel="stylesheet" />
+    <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+</head>
+<body>
+<!-- Include navbar -->
+<div th:replace="~{navbar :: navbar}"></div>
+
+<main>
+    <h1 id="cartName">Coșul Meu</h1>
+    <div id="cartContainer"></div>
+    <div id="cartSummary">
+        <p>Total: <span id="cartTotal">0.00</span> MDL</p>
+        <button id="checkoutBtn" disabled>Finalizează comanda</button>
+    </div>
+</main>
+
+<script th:src="@{/js/cart.js}" defer></script>
+<script th:src="@{/js/navbar.js}" defer></script>
+</body>
+</html>

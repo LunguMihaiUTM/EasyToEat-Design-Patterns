@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EasyToEat</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <script defer th:src="@{/js/navbar.js}"></script>
+</head>
+<body>
+<nav th:fragment="navbar" class="navbar" id="navbar">
+    <div class="navbar-container">
+        <div class="navbar-brand">
+            <a th:href="@{/home}" class="brand-link">
+                <span class="brand-name">EasyToEat</span>
+            </a>
+        </div>
+
+        <div class="navbar-menu" id="navbarMenu">
+            <div class="navbar-nav">
+                <a th:href="@{/home}" class="nav-link">Acasă</a>
+                <a th:href="@{/restaurants}" class="nav-link">Restaurante</a>
+                <a th:href="@{/reservations}" class="nav-link">Rezervări</a>
+                <!--                -->
+                <div class="navbar-cart" id="navbarCart">
+                    <a th:href="@{/cart}" class="cart-btn" title="Coșul meu">
+                        🛒 <span id="cartCount" class="cart-count">0</span>
+                    </a>
+                </div>
+                <!--                -->
+            </div>
+
+            <div class="navbar-user">
+                <div class="user-menu" id="userMenu">
+                    <button class="user-btn" id="userBtn">
+                        <span class="user-icon">👤</span>
+                        <span class="user-name" id="userName">Client</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" class="dropdown-item">Profilul meu</a>
+                        <a href="#" class="dropdown-item">Setări</a>
+                        <a th:href="@{/bookings}" class="dropdown-item">Comenzile Mele</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-btn" id="logoutBtn">Deconectare</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <span class="hamburger"></span>
+        </button>
+    </div>
+</nav>
+</body>
+</html>

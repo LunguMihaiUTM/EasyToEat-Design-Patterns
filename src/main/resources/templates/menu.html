@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meniu Restaurant</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+</head>
+<body>
+
+<div th:replace="~{navbar :: navbar}"></div>
+
+<main>
+    <h1 id="restaurantName">Meniu Restaurant</h1>
+    <div id="menuItems" class="menu-items"></div>
+</main>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/menu.js}"></script>
+</body>
+</html>

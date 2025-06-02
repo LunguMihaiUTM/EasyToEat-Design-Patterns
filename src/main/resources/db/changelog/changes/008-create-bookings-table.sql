@@ -7,13 +7,11 @@ create table bookings
     order_time     timestamp,
     no_people      int,
     final_price    double precision,
-    name           varchar(255),
-    phone_number   varchar(255),
     items          varchar(255),
-    mail           varchar(255),
+    user_id        bigint,
     CONSTRAINT FK_TABLES_BOOKING FOREIGN KEY (table_id) REFERENCES tables (id),
-    CONSTRAINT FK_LOCATIONS_BOOKING FOREIGN KEY (location_id) REFERENCES locations (id)
-
+    CONSTRAINT FK_LOCATIONS_BOOKING FOREIGN KEY (location_id) REFERENCES locations (id),
+    CONSTRAINT FK_USER_BOOKING FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 alter table bookings owner to root;

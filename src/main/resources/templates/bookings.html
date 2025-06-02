@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Bookinguri Utilizator</title>
+    <link rel="stylesheet" th:href="@{/css/bookings.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+<body>
+
+<div th:replace="~{navbar :: navbar}"></div>
+
+<main id="bookingsMain">
+    <h1>Bookingurile Mele</h1>
+    <div id="bookingList">
+        <!-- Bookingurile vor fi injectate aici -->
+    </div>
+    <div id="noBookingsMsg" style="display:none;">Nu ai bookinguri înregistrate.</div>
+</main>
+
+<script th:src="@{/js/bookings.js}"></script>
+<script th:src="@{/js/navbar.js}"></script>
+</body>
+</html>
