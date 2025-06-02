@@ -1,6 +1,7 @@
 package agin.designpatternproject.controller;
 
 import agin.designpatternproject.dto.request.BookingDTO;
+import agin.designpatternproject.dto.request.PaymentRequest;
 import agin.designpatternproject.entity.Booking;
 import agin.designpatternproject.entity.User;
 import agin.designpatternproject.enums.Role;
@@ -36,11 +37,12 @@ public class BookingController {
     public ResponseEntity<String> create(
             @RequestBody BookingDTO bookingDTO,
             @RequestParam String promoCode,
+            @RequestParam String paymentType,
             @RequestHeader("Authorization") String authHeader){
 
         User user = userExtractor.getUser(tokenExtractor.getToken(authHeader));
 
-        return ResponseEntity.ok(bookingFacade.createBooking(user.getId(), bookingDTO, promoCode));
+        return ResponseEntity.ok(bookingFacade.createBooking(user.getId(), bookingDTO, promoCode, paymentType));
     }
 
     @SecurityRequirement(name = "bearerAuth")

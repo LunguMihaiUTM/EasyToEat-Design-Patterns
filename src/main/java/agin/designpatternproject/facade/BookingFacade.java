@@ -1,15 +1,19 @@
 package agin.designpatternproject.facade;
 
+import agin.designpatternproject.adapter.PaymentProcessor;
 import agin.designpatternproject.command.MarkTableAsOccupiedCommand;
 import agin.designpatternproject.command.TableAvailabilityCommand;
 import agin.designpatternproject.decorator.Discount;
 import agin.designpatternproject.dto.request.BookingDTO;
+import agin.designpatternproject.dto.request.PaymentRequest;
 import agin.designpatternproject.entity.Booking;
 import agin.designpatternproject.entity.Table;
 import agin.designpatternproject.entity.User;
 import agin.designpatternproject.enums.Status;
 import agin.designpatternproject.exception.RestaurantResourceException;
+import agin.designpatternproject.factory.CashPayment;
 import agin.designpatternproject.factory.DiscountFactory;
+import agin.designpatternproject.factory.PaymentFactory;
 import agin.designpatternproject.observer.BookingObserver;
 import agin.designpatternproject.repository.TableRepository;
 import agin.designpatternproject.repository.UserRepository;
@@ -29,12 +33,13 @@ public class BookingFacade {
     private final PriceCalculationService priceCalculationService;
     private final BookingPersistenceService bookingPersistenceService;
     private final RestaurantResourceService restaurantResourceService;
+    private final PaymentFactory paymentFactory;
     private final BookingObserver bookingObserver;
 
     private final UserRepository userRepository;
     private final TableRepository tableRepository;
 
-    public String createBooking(Long userId ,BookingDTO dto, String promoCode) {
+    public String createBooking(Long userId , BookingDTO dto, String promoCode, String paymentType) {
 
         tableAvailabilityService.validateTableIsFree(dto.getTableId());
 
@@ -68,6 +73,14 @@ public class BookingFacade {
                 .orElseThrow(() -> new RestaurantResourceException("Table not found"));
         TableAvailabilityCommand markAsOccupied = new MarkTableAsOccupiedCommand(table, tableRepository);
         markAsOccupied.execute();
+
+        PaymentProcessor paymentProcessor = paymentFactory.getPaymentProcessor(paymentType);
+        PaymentRequest paymentRequest = new PaymentRequest();
+        paymentRequest.setAmount(finalPrice);
+        paymentRequest.setCvv("123");
+        paymentRequest.setExpiry("10/29");
+        paymentRequest.setCardNumber("1234123412341234");
+        paymentProcessor.processPayment(paymentRequest);
 
         //Observer - notify the user
         //bookingObserver.onBookingCreation(user, booking);
